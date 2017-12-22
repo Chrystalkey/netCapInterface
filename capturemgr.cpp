@@ -1,20 +1,21 @@
 #include "capturemgr.h"
 #include "global.h"
 #include <QTimer>
-#include <spoofingmgr.h>
+#include "spoofingmgr.h"
+#include <QDebug>
 
 namespace Capture{
 CaptureMgr::CaptureMgr(QObject *parent) : QObject(parent)
 {
-    pcap_if_t *d;
+    pcap_if_t *d = NULL;
     size_t s = 0;
     tmr.setInterval(1000);
     pcap_findalldevs(&alldevs,errbuf);
     for(d = alldevs;d!=NULL;d = d->next,s++){
         devList.append(new Device(d,s,this));
-        std::cout<<"\n" << d->name << " (" << d->description << "): " << s;
+        qDebug() << "\n" << QString(d->name) << " (" << QString(d->description) << "): " << s;
     }
-    std::cout << "Enter Device to Listen on: ";
+    qDebug() << "Enter Device to Listen on: ";
     std::string str = "1";
 //    std::cin>>str;
     currDevice = QString::fromStdString(str).toUInt();

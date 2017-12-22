@@ -5,6 +5,7 @@
 #include <string>
 #include <QString>
 #include "headerstructs.h"
+#include <iostream>
 
 namespace Capture {
 void pcap_error(const char *failed_in, const char *error);

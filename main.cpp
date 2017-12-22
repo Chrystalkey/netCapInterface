@@ -4,6 +4,7 @@
 #include "global.h"
 #include "headerstructs.h"
 #include "capturemgr.h"
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {
@@ -12,7 +13,6 @@ int main(int argc, char *argv[])
     mgr.startListening();
     return a.exec();
 }
-
 void Capture::pcap_error(const char *failed_in, const char *error){
     std::cerr << "[ERROR] in"+std::string(failed_in)+": "+std::string(error)+"\n";
 }

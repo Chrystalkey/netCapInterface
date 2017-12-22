@@ -41,24 +41,18 @@ HEADERS += \
     networkdevice.h \
     spoofingmgr.h
 
-#win32: LIBS += -L$$PWD/../../../dev/WpdPack/Lib/ -lwpcap
+#### wnpcap ####
+win32: LIBS += -LD:/dev/WpdPack/Lib/ -lwpcap
 
-#INCLUDEPATH += $$PWD/../../../dev/WpdPack/Include
-#DEPENDPATH += $$PWD/../../../dev/WpdPack/Include
+INCLUDEPATH += D:/dev/WpdPack/Include
+DEPENDPATH += D:/dev/WpdPack/Include
 
-#win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../../dev/WpdPack/Lib/wpcap.lib
-#else:win32-g++: PRE_TARGETDEPS += $$PWD/../../../dev/WpdPack/Lib/libwpcap.a
+win32:!win32-g++: PRE_TARGETDEPS += D:/dev/WpdPack/Lib/wpcap.lib
+else:win32-g++: PRE_TARGETDEPS += D:/dev/WpdPack/Lib/libwpcap.a
 
-win32: LIBS += -LC:/WpdPack/Lib/ -lwpcap
 
-INCLUDEPATH += C:/WpdPack/Include
-DEPENDPATH += C:/WpdPack/Include
-
-win32:!win32-g++: PRE_TARGETDEPS += C:/WpdPack/Lib/wpcap.lib
-else:win32-g++: PRE_TARGETDEPS += C:/WpdPack/Lib/libwpcap.a
-
+#### libnet ####
 win32: LIBS += -L$$PWD/../../../../libnet/lib/ -lnet
-
 INCLUDEPATH += $$PWD/../../../../libnet/include
 DEPENDPATH += $$PWD/../../../../libnet/include
 INCLUDEPATH += $$PWD/../../../../libnet/lib/include
@@ -66,3 +60,4 @@ DEPENDPATH += $$PWD/../../../../libnet/lib/include
 
 win32:!win32-g++: PRE_TARGETDEPS += $$PWD/../../../../libnet/lib/net.lib
 else:win32-g++: PRE_TARGETDEPS += $$PWD/../../../../libnet/lib/libnet.a
+

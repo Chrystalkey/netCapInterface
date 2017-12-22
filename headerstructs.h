@@ -15,7 +15,8 @@ struct ethernet_hdr{
     uchar ether_dst_addr[ETHER_ADDR_LEN];
     uchar ether_src_addr[ETHER_ADDR_LEN];
     ushort ether_type;
-
+#define ETHER_TYPE_ARP 0x0806
+#define ETHER_TYPE_IPv4 0x0800
 };
 struct ip_hdr{
     uchar ip_version_and_header_length;
@@ -47,23 +48,20 @@ struct tcp_hdr{
     ushort tcp_checksum;
     ushort tcp_urgent;
 };
-class Header{
-public:
-    Header(const uchar* packet);
-    QString getSrcIp();
-    QString getDstIp();
-    ushort getSrcPort()const;
-    ushort getDstPort()const;
-    QString getSrcMac();
-    QString getDstMac();
-private:
-    bool decodeIp(const uchar *pkt);
-    bool decodeEth(const uchar *pkt);
-    bool decodeTcp(const uchar *ptk);
-    bool ethB = false,ipB = false,tcpB = false,udpB = false,arpB = false;
-    struct ip_hdr ip;
-    struct tcp_hdr tcp;
-    struct ethernet_hdr eth;
+struct arp_hdr{
+    ushort arpHAddrType;
+#define ARP_HDR_TYPE_ETHERNET 0x01
+    ushort arpPAddrType;
+#define ARP_PRT_TYPE_IPv4 0x0800
+    uchar arpHAddrSize;
+    uchar arpPAddrSize;
+    ushort arpOp;
+#define ARP_OP_REQUEST 0x01
+#define ARP_OP_RESPONSE 0x02
+    uchar arpSrcMac[6];
+    uint arpSrcIp;
+    uchar arpDstMac[6];
+    uint arpDstIp;
 };
 }
 

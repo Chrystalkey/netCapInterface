@@ -22,7 +22,7 @@ public slots:
 private:
     QTimer tmr;
     QList<Device*> devList;
-    pcap_if_t *alldevs;
+    pcap_if_t *alldevs = NULL;
     char errbuf[PCAP_ERRBUF_SIZE];
     unsigned long cap_size = 0;
     unsigned int currDevice;
